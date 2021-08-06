@@ -1,0 +1,42 @@
+class Solution {
+public:
+    /**
+     * 
+     * @param arr int整型vector the array
+     * @return int整型
+     */
+    int maxLength(vector<int>& arr) {
+        int begin = 0;
+        int end = 0;
+        int max = 0;
+        while(end < arr.size())
+        {
+            //找是否会重复
+            int flag = 0;
+            int i = begin;
+            for(i = begin;i < end;i++)
+            {
+                if(arr[i] == arr[end])
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            //有重复，begin后移，更新max
+            if(flag == 1)
+            {
+                if(max < end-begin)
+                    max = end-begin;
+                begin = i+1;
+            }
+            else 
+            {
+                //没有重复，end继续后移
+                end++;
+            }
+        }
+        if(end - begin > max)
+            max = end-begin;
+        return max;
+    }
+};
